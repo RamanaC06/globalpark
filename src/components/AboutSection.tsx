@@ -110,7 +110,7 @@ const AboutSection: React.FC = () => {
   const LogoSection = () => (
     <div ref={logoRef} >
       <img
-        src="/images/logo.png"
+        src="https://www.clipartmax.com/png/middle/171-1715147_globe-logo-clip-art-social-science-global-perspectives.png"
         alt="Global Park Logo"
         
       />
