@@ -16,20 +16,7 @@ const Footer: React.FC = () => {
               Leading the way in technological innovation and global trade solutions. 
               We bridge the gap between cutting-edge technology and practical business applications.
             </p>
-            <div className="flex space-x-3 sm:space-x-4">
-              <a href="#" className="bg-gray-800 hover:bg-blue-600 p-2 sm:p-3 rounded-lg transition-colors duration-300">
-                <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
-              </a>
-              <a href="#" className="bg-gray-800 hover:bg-blue-600 p-2 sm:p-3 rounded-lg transition-colors duration-300">
-                <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
-              </a>
-              <a href="#" className="bg-gray-800 hover:bg-blue-600 p-2 sm:p-3 rounded-lg transition-colors duration-300">
-                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
-              </a>
-              <a href="#" className="bg-gray-800 hover:bg-blue-600 p-2 sm:p-3 rounded-lg transition-colors duration-300">
-                <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
-              </a>
-            </div>
+        
           </div>
 
           {/* Quick Links */}

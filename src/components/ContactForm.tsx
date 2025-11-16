@@ -1,9 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Send, Phone, Mail, MapPin, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import emailjs from 'emailjs-com';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Initialize EmailJS - Replace with your actual Service ID
+const SERVICE_ID = 'service_5gb7u4c';
+const TEMPLATE_ID = 'template_0v0c2r0';
+const PUBLIC_KEY = 'OXYh3AJ38MFMfDLYB';
+
+// Initialize EmailJS
+emailjs.init(PUBLIC_KEY);
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -13,9 +22,14 @@ const ContactForm: React.FC = () => {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
+
   const formRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
+  const formElementRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     let mm = gsap.matchMedia();
@@ -125,9 +139,55 @@ const ContactForm: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          to_email: 'globalpark05@gmail.com',
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          reply_to: formData.email
+        }
+      );
+
+      if (result.status === 200) {
+        setSubmitStatus('success');
+        setStatusMessage('Message sent successfully! We\'ll get back to you within 24 hours.');
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus('idle');
+        }, 5000);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitStatus('error');
+      setStatusMessage('Failed to send message. Please try again later or contact us directly.');
+      
+      // Auto-hide error message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -150,7 +210,27 @@ const ContactForm: React.FC = () => {
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">
                 Send us a message
               </h3>
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+
+              {/* Status Message */}
+              {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-start space-x-3 animate-fade-in">
+                  <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-green-800 font-semibold text-sm sm:text-base">{statusMessage}</p>
+                  </div>
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start space-x-3 animate-fade-in">
+                  <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-red-800 font-semibold text-sm sm:text-base">{statusMessage}</p>
+                  </div>
+                </div>
+              )}
+
+              <form ref={formElementRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <input
@@ -161,6 +241,7 @@ const ContactForm: React.FC = () => {
                       onChange={handleInputChange}
                       className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-gray-300 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div>
@@ -172,6 +253,7 @@ const ContactForm: React.FC = () => {
                       onChange={handleInputChange}
                       className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-gray-300 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -184,6 +266,7 @@ const ContactForm: React.FC = () => {
                     onChange={handleInputChange}
                     className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-gray-300 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div>
@@ -195,14 +278,20 @@ const ContactForm: React.FC = () => {
                     onChange={handleInputChange}
                     className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-gray-300 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none text-sm sm:text-base"
                     required
+                    disabled={isSubmitting}
                   ></textarea>
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 text-sm sm:text-base"
+                  disabled={isSubmitting}
+                  className={`w-full font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform flex items-center justify-center space-x-2 text-sm sm:text-base ${
+                    isSubmitting
+                      ? 'bg-gray-400 text-white cursor-not-allowed'
+                      : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white hover:scale-105'
+                  }`}
                 >
                   <Send className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span>Send Message</span>
+                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                 </button>
               </form>
             </div>
