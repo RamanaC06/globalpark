@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <button onClick={() => navigate('/')} className="flex items-center space-x-2">
             <img
-              src="https://strange-silver-9oy5rclwas.edgeone.app/logo.png"
+                src="/logo.png"
               alt="Global Park Logo"
               className={`w-8 h-8 sm:w-10 sm:h-10 transition-transform duration-300 ${
                 isScrolled ? 'transform scale-90' : 'transform scale-100'

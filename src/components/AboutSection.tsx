@@ -110,7 +110,7 @@ const AboutSection: React.FC = () => {
   const LogoSection = () => (
     <div ref={logoRef} >
       <img
-        src="https://strange-silver-9oy5rclwas.edgeone.app/logo.png"
+          src="/logo.png"
         alt="Global Park Logo"
         
       />
