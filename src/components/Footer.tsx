@@ -66,17 +66,18 @@ const Footer: React.FC = () => {
               <div className="flex items-start space-x-2 sm:space-x-3">
                 <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 mt-0.5" />
                 <p className="text-gray-300 text-sm sm:text-base">
-                  123 Global Park Avenue<br />
-                  Tech City, State 12345
+                  TVS Nagar<br />
+                  Madurai - 625011
+  
                 </p>
               </div>
               <div className="flex items-center space-x-2 sm:space-x-3">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
-                <p className="text-gray-300 text-sm sm:text-base">+91 (555) 123-4567</p>
+                <p className="text-gray-300 text-sm sm:text-base">+91 8438276559</p>
               </div>
               <div className="flex items-center space-x-2 sm:space-x-3">
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
-                <p className="text-gray-300 text-sm sm:text-base">info@globalpark.com</p>
+                <p className="text-gray-300 text-sm sm:text-base">globalpark05@gmail.com</p>
               </div>
             </div>
           </div>

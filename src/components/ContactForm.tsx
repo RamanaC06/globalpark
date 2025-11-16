@@ -229,9 +229,8 @@ const ContactForm: React.FC = () => {
                     <div>
                       <h4 className="font-semibold text-gray-800 text-sm sm:text-base mb-1">Address</h4>
                       <p className="text-gray-600 text-sm sm:text-base">
-                        123 Global Park Avenue<br />
-                        Business District, Tech City<br />
-                        State 12345, Country
+                        TVS Nager <br />
+                       Madurai - 625011
                       </p>
                     </div>
                   </div>
@@ -242,7 +241,7 @@ const ContactForm: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800 text-sm sm:text-base mb-1">Phone</h4>
-                      <p className="text-gray-600 text-sm sm:text-base">+1 (555) 123-4567</p>
+                      <p className="text-gray-600 text-sm sm:text-base">+91 8438276559</p>
                     </div>
                   </div>
 
@@ -262,7 +261,7 @@ const ContactForm: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800 text-sm sm:text-base mb-1">Email</h4>
-                      <p className="text-gray-600 text-sm sm:text-base">info@globalpark.com</p>
+                      <p className="text-gray-600 text-sm sm:text-base">globalpark05@gmail.com</p>
                       <p className="text-xs sm:text-sm text-blue-600 mt-1">We reply within 24 hours</p>
                     </div>
                   </div>
