@@ -7,9 +7,9 @@ import emailjs from 'emailjs-com';
 gsap.registerPlugin(ScrollTrigger);
 
 // Initialize EmailJS - Replace with your actual Service ID
-const SERVICE_ID = 'service_5gb7u4c';
-const TEMPLATE_ID = 'template_0v0c2r0';
-const PUBLIC_KEY = 'OXYh3AJ38MFMfDLYB';
+const SERVICE_ID = 'service_aeky36g';
+const TEMPLATE_ID = 'template_eg3tkme';
+const PUBLIC_KEY = 'r3pJDNJMeDfRjv7Bk';
 
 // Initialize EmailJS
 emailjs.init(PUBLIC_KEY);
